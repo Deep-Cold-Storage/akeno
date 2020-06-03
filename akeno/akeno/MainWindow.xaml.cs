@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Http;
+using System.Text.Json;
+using System.Net.Http.Json;
 
 namespace akeno
 {
@@ -27,6 +30,42 @@ namespace akeno
 
             UpdateMovieList();
 
+        }
+
+    
+
+        private static async Task<Movie> GetJsonHttpClient(string uri, HttpClient httpClient)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                Trace.WriteLine(responseBody);
+
+                using var jsonDoc = JsonDocument.Parse(responseBody);
+                var root = jsonDoc.RootElement;
+
+                var myString = root.GetProperty("results")[0];
+                Trace.WriteLine(myString);
+
+               return new Movie { Title = myString.GetProperty("title").ToString() };
+            }
+            catch (HttpRequestException) // Non success
+            {
+                Console.WriteLine("An error occurred.");
+            }
+            catch (NotSupportedException) // When content type is not valid
+            {
+                Console.WriteLine("The content type is not supported.");
+            }
+            catch (JsonException) // Invalid JSON
+            {
+                Console.WriteLine("Invalid JSON.");
+            }
+
+            return null;
         }
 
         private void UpdateMovieList()
@@ -51,7 +90,7 @@ namespace akeno
             }
         }
 
-        private void movieAddButton_Click(object sender, RoutedEventArgs e)
+        private async void MovieAddButton_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new DatabaseContext())
             {
@@ -61,7 +100,12 @@ namespace akeno
                     return;
                 }
 
-                db.Add(new Movie { Title = movieTitleForm.Text });
+                HttpClient client = new HttpClient();
+                var movie = await GetJsonHttpClient("https://api.themoviedb.org/3/search/movie?api_key=f08ca94e9e62a564b46cdff1046fce3a&query=" + movieTitleForm.Text, client) as Movie;
+
+                Trace.WriteLine(movie.Title);
+
+                db.Add(movie);
                 db.SaveChanges();
                 movieTitleForm.Text = "";
 
