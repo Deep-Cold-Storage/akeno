@@ -35,7 +35,14 @@ namespace akeno
         {
             using (var db = new DatabaseContext())
             {
-                moviesListBox.ItemsSource = db.Movies.ToList();
+                if (movieTitleForm.Text == "")
+                {
+                    moviesListBox.ItemsSource = db.Movies.ToList();
+                } 
+                else
+                {
+                    moviesListBox.ItemsSource = db.Movies.ToList().Where(o => o.Title.Contains(movieTitleForm.Text));
+                }        
             }
         }
 
@@ -60,6 +67,11 @@ namespace akeno
 
                 UpdateMovieList();
             }
+        }
+
+        private void movieTitleForm_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateMovieList();
         }
     }
 }
