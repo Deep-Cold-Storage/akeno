@@ -55,7 +55,7 @@ namespace akeno
                 for (int i = 1; i <= len; i++)
                 {
                     var myString = root.GetProperty("results")[i];
-                    movies.Add(new Movie { Title = myString.GetProperty("title").ToString(), PosterPath = "https://image.tmdb.org/t/p/w500/" + myString.GetProperty("poster_path").ToString(), Description = myString.GetProperty("overview").ToString(), ReleaseDate = myString.GetProperty("release_date").ToString() });
+                    movies.Add(new Movie { Title = myString.GetProperty("title").ToString(), PosterPath = "https://image.tmdb.org/t/p/w500/" + myString.GetProperty("poster_path").ToString(), Description = myString.GetProperty("overview").ToString(), ReleaseDate = myString.GetProperty("release_date").ToString().Split("-")[0] });
                 }
 
                 return movies;
