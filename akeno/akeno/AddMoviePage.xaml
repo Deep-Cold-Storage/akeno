@@ -24,15 +24,15 @@
 
         <Button Grid.Column="1" Grid.Row="0" x:Name="movieSearchButton" Content="Search Movie" Click="movieSearchButton_ClickAsync" Margin="5,0,5,0"/>
 
-        <ListBox x:Name="moviesListBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,5,10,5">
+        <ListBox x:Name="moviesListBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,5,10,5" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="20"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="20"/>
                         </Grid.ColumnDefinitions>
 
@@ -43,10 +43,10 @@
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
-                        <Image Height="170" x:Name="moviesListBox" Source="{Binding PosterPath}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Margin="5,5,5,5"/>
+                        <Image Height="200" x:Name="moviesListBox" Source="{Binding PosterPath}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Margin="5,5,5,5"/>
                         <TextBlock Text="{Binding Title}" Grid.Column="2" Grid.Row="1"/>
-                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" MaxWidth="535"/>
-                        <TextBlock Text="{Binding ReleaseDate}"  Grid.Column="4" Grid.Row="1" />
+                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding ReleaseDate}" Grid.Column="3" Grid.Row="1"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
