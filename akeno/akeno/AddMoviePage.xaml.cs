@@ -55,25 +55,15 @@ namespace akeno
                 for (int i = 1; i <= len; i++)
                 {
                     var myString = root.GetProperty("results")[i];
-                    movies.Add(new Movie { Title = myString.GetProperty("title").ToString(), PosterPath = "https://image.tmdb.org/t/p/w500/" + myString.GetProperty("poster_path").ToString(), Description = myString.GetProperty("overview").ToString(), ReleaseDate = myString.GetProperty("release_date").ToString().Split("-")[0] });
+                    movies.Add(new Movie { Title = myString.GetProperty("title").ToString(), PosterPath = "https://image.tmdb.org/t/p/w500/" + myString.GetProperty("poster_path").ToString(), Description = myString.GetProperty("overview").ToString(), ReleaseDate = "Released: " + myString.GetProperty("release_date").ToString().Split("-")[0] });
                 }
 
                 return movies;
             }
             catch (HttpRequestException) // Non success
             {
-                Console.WriteLine("An error occurred.");
+                return new List<Movie> { }; ;
             }
-            catch (NotSupportedException) // When content type is not valid
-            {
-                Console.WriteLine("The content type is not supported.");
-            }
-            catch (JsonException) // Invalid JSON
-            {
-                Console.WriteLine("Invalid JSON.");
-            }
-
-            return null;
         }
 
         private void MovieAddButton_Click(object sender, RoutedEventArgs e)
