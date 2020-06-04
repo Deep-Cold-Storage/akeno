@@ -12,7 +12,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Akano" Height="450" Width="800">
+        Title="Akano" Height="750" Width="800">
     
     <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="10,10,10,10">
         

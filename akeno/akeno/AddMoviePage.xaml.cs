@@ -83,6 +83,11 @@ namespace akeno
 
                 var movie = moviesListBox.SelectedItem as Movie;
 
+                if (movie == null)
+                {
+                    return;
+                }
+
                 db.Add(movie);
                 db.SaveChanges();
 
