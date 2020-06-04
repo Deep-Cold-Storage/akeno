@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -28,7 +29,7 @@ namespace akeno
         }
 
 
-        private static async Task<Movie> GetJsonHttpClient(string uri, HttpClient httpClient)
+        private static async Task<List<Movie>> GetJsonHttpClient(string uri, HttpClient httpClient)
         {
             try
             {
@@ -41,10 +42,23 @@ namespace akeno
                 using var jsonDoc = JsonDocument.Parse(responseBody);
                 var root = jsonDoc.RootElement;
 
-                var myString = root.GetProperty("results")[0];
-                Trace.WriteLine(myString);
+                List<Movie> movies = new List<Movie> { };
 
-                return new Movie { Title = myString.GetProperty("title").ToString(), PosterPath = "https://image.tmdb.org/t/p/w500/" + myString.GetProperty("poster_path").ToString(), Description = myString.GetProperty("overview").ToString(), ReleaseDate = myString.GetProperty("release_date").ToString() };
+                var len = root.GetProperty("results").GetArrayLength() - 1;
+
+                if (len > 5)
+                {
+                    len = 5;
+                }
+
+
+                for (int i = 1; i <= len; i++)
+                {
+                    var myString = root.GetProperty("results")[i];
+                    movies.Add(new Movie { Title = myString.GetProperty("title").ToString(), PosterPath = "https://image.tmdb.org/t/p/w500/" + myString.GetProperty("poster_path").ToString(), Description = myString.GetProperty("overview").ToString(), ReleaseDate = myString.GetProperty("release_date").ToString() });
+                }
+
+                return movies;
             }
             catch (HttpRequestException) // Non success
             {
@@ -62,18 +76,12 @@ namespace akeno
             return null;
         }
 
-        private async void MovieAddButton_Click(object sender, RoutedEventArgs e)
+        private void MovieAddButton_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new DatabaseContext())
             {
 
-                if (movieTitleForm.Text == "")
-                {
-                    return;
-                }
-
-                HttpClient client = new HttpClient();
-                var movie = await GetJsonHttpClient("https://api.themoviedb.org/3/search/movie?api_key=f08ca94e9e62a564b46cdff1046fce3a&query=" + movieTitleForm.Text, client) as Movie;
+                var movie = moviesListBox.SelectedItem as Movie;
 
                 db.Add(movie);
                 db.SaveChanges();
@@ -81,6 +89,19 @@ namespace akeno
                 this.NavigationService.Navigate(new ListMoviePage());
 
             }
+        }
+
+        private async void movieSearchButton_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            if (movieTitleForm.Text == "")
+            {
+                return;
+            }
+
+            HttpClient client = new HttpClient();
+            List<Movie> movies = await GetJsonHttpClient("https://api.themoviedb.org/3/search/movie?api_key=f08ca94e9e62a564b46cdff1046fce3a&query=" + movieTitleForm.Text, client) as List<Movie>;
+
+            moviesListBox.ItemsSource = movies;
         }
     }
 }

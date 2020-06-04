@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Akano" Height="450" Width="800">
     
-    <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden">
+    <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="10,10,10,10">
         
     </Frame>
 </Window>
