@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 namespace akeno
 {
     /// <summary>
-    /// Interaction logic for ListMoviePage.xaml
+    /// Interaction logic for ListMoviePage. Update moviesListBox on startup.
     /// </summary>
     public partial class ListMoviePage : Page
     {
@@ -28,9 +28,11 @@ namespace akeno
             InitializeComponent();
 
             UpdateMovieList();
-
         }
 
+        /// <summary>
+        /// Update movieListBox from local database. Filters output by movieTitleForm search bar.
+        /// </summary>
         private void UpdateMovieList()
         {
             using (var db = new DatabaseContext())
@@ -46,17 +48,26 @@ namespace akeno
             }
         }
 
+        /// <summary>
+        /// Interaction logic for NavigationAddMovie_Click. Navigates to AddMoviePage.
+        /// </summary>
         private void NavigationAddMovie_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AddMoviePage());
 
         }
 
+        /// <summary>
+        /// Interaction logic for MovieDeleteButton_Click. Delete Movie object from local database.
+        /// Refresh listBox with new content.
+        /// </summary>
         private void MovieDeleteButton_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new DatabaseContext())
             {
                 var movie = moviesListBox.SelectedItem as Movie;
+                
+                // Check if any list item is selected.
                 if (movie == null)
                 {
                     return;
@@ -69,6 +80,10 @@ namespace akeno
             }
         }
 
+        /// <summary>
+        /// Interaction logic for movieTitleForm.
+        /// Refresh listBox with filtered content.
+        /// </summary>
         private void movieTitleForm_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateMovieList();

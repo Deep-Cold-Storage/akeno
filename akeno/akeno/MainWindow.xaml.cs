@@ -20,7 +20,7 @@ using System.Net.Http.Json;
 namespace akeno
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logic for loading ListMoviePage on startup.
     /// </summary>
     public partial class MainWindow : Window
     {

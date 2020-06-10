@@ -9,9 +9,10 @@ using System.Windows;
 namespace akeno
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Main application class.
     /// </summary>
     public partial class App : Application
     {
+
     }
 }
