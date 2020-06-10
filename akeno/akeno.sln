@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "akeno", "akeno\akeno.csproj", "{6BF6303E-744E-48F1-B177-3AD7001E7774}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "akeno", "akeno\akeno.csproj", "{6BF6303E-744E-48F1-B177-3AD7001E7774}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "akeno_tests", "akeno_tests1\akeno_tests.csproj", "{EEBBA9DD-2F14-42E9-8A4C-82D466BE2A1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6BF6303E-744E-48F1-B177-3AD7001E7774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BF6303E-744E-48F1-B177-3AD7001E7774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BF6303E-744E-48F1-B177-3AD7001E7774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEBBA9DD-2F14-42E9-8A4C-82D466BE2A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEBBA9DD-2F14-42E9-8A4C-82D466BE2A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEBBA9DD-2F14-42E9-8A4C-82D466BE2A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEBBA9DD-2F14-42E9-8A4C-82D466BE2A1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
