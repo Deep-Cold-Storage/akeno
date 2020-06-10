@@ -23,4 +23,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Release Package
-        path: akeno\akeno\html\
+        path: akeno/akeno/html/
