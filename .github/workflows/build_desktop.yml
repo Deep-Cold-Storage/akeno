@@ -28,7 +28,7 @@ jobs:
       run: dotnet publish -c Release -r win10-x64 akeno/akeno
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: Release Package
-        path: akeno\akeno\akeno\bin\Release\netcoreapp3.1\win10-x64
+        path: akeno/akeno/akeno/bin/Release/netcoreapp3.1/win10-x64/
