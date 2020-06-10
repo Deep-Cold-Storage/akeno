@@ -17,10 +17,10 @@ jobs:
     - uses: mattnotmitt/doxygen-action@v1
       with:
         working-directory: 'akeno/akeno'
-        doxyfile-path: 'akeno/Doxygen'
+        doxyfile-path: './Doxygen'
 
     - name: Upload docs as artifact
       uses: actions/upload-artifact@v2
       with:
         name: Release Package
-        path: D:\a\akeno\akeno\html\
+        path: akeno\akeno\html\
