@@ -51,6 +51,8 @@ namespace akeno
         /// <summary>
         /// Interaction logic for NavigationAddMovie_Click. Navigates to AddMoviePage.
         /// </summary>
+        /// <param name="sender">An object that owns the event handler.</param>
+        /// <param name="e">Args from interaction event.</param>
         private void NavigationAddMovie_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AddMoviePage());
@@ -61,6 +63,8 @@ namespace akeno
         /// Interaction logic for MovieDeleteButton_Click. Delete Movie object from local database.
         /// Refresh listBox with new content.
         /// </summary>
+        /// <param name="sender">An object that owns the event handler.</param>
+        /// <param name="e">Args from interaction event.</param>
         private void MovieDeleteButton_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new DatabaseContext())
@@ -84,6 +88,8 @@ namespace akeno
         /// Interaction logic for movieTitleForm.
         /// Refresh listBox with filtered content.
         /// </summary>
+        /// <param name="sender">An object that owns the event handler.</param>
+        /// <param name="e">Args from interaction event.</param>
         private void movieTitleForm_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateMovieList();

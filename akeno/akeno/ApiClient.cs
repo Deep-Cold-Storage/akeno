@@ -12,6 +12,8 @@ namespace akeno
         /// <summary>
         /// Async create List of Movie objects from MovieDB API by searchQuery.
         /// </summary>
+        /// <param name="searchQuery">The query for the external API endpoint.</param>
+        /// <param name="httpClient">Base class for sending and receiving HTTP requests.</param>
         /// <returns>
         /// Return List of Movie objects with metadata.
         /// <returns>

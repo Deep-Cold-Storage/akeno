@@ -33,6 +33,8 @@ namespace akeno
         /// Interaction logic for MovieAddButton_Click. 
         /// Save selected Movie to local database and navigate to ListMoviePage.
         /// </summary>
+        /// <param name="sender">An object that owns the event handler.</param>
+        /// <param name="e">Args from interaction event.</param>
         private void MovieAddButton_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new DatabaseContext())
@@ -57,6 +59,8 @@ namespace akeno
         /// Interaction logic for MovieSearchButton_ClickAsync. 
         /// Search API by movieTitleForm text. Update listBox with Movie results found.
         /// </summary>
+        /// <param name="sender">An object that owns the event handler.</param>
+        /// <param name="e">Args from interaction event.</param>
         private async void MovieSearchButton_ClickAsync(object sender, RoutedEventArgs e)
         {
             if (movieTitleForm.Text == "")
